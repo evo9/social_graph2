@@ -112,9 +112,9 @@ function getLinks($data, $nodes)
     foreach ($data as $k => $d) {
         $link = array();
         foreach ($nodes as $i => $node) {
-            if($node['name'] == 'DA') {
+            /*if($node['name'] == 'DA') {
                 echo $d[0] . ' / ' . $d[1] . '<br />';
-            }
+            }*/
             if ($node['name'] == $d[1]) {
                 $link['target'] = $i;
             }
