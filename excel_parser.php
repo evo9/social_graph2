@@ -20,13 +20,13 @@ $additionalData = getSheetData($objPHPExcel, 2);
 $returns = array();
 
 if (count($relations) > 0 && count($definitions) > 0 && count($additionalData)) {
-    $groups = getGroups($definitions);
-    $nodes = getNodes($definitions, $groups);
-    $links = getLinks($relations, $nodes);
+    $groups = getGroups($relations);
+    $nodes = getNodes($relations, $definitions, $groups);
     /*echo '<pre>';
-    var_dump($links);
+    var_dump($nodes);
     echo '</pre>';
     die;*/
+    $links = getLinks($relations, $nodes);
     $additionalNodesData = getAdditionalNodesData($additionalData, $nodes);
 
     $returns = array(
@@ -61,27 +61,45 @@ function getGroups($data)
     $groups = array();
 
     foreach ($data as $d) {
-        if ($d[1] > '' && !in_array($d[1], $groups)) {
-            $groups[] = $d[1];
+        if ($d[2] > '' && !in_array($d[2], $groups)) {
+            $groups[] = $d[2];
         }
     }
 
     return $groups;
 }
 
-function getNodes($data, $groups)
+function getNodes($relations, $definitions, $groups)
 {
     $nodes = array();
 
-    foreach ($groups as $k => $g) {
-        foreach ($data as $d) {
-            if ($g == $d[1]) {
-                $nodes[] = array(
-                    'name' => $d[0],
-                    'group' => $k
-                );
+    $relationsArr = array();
+    foreach ($relations as $r) {
+        if ($r[0] > '' && !in_array($r[0], $relationsArr)) {
+            $relationsArr[] = $r[0];
+        }
+    }
+    foreach ($relations as $r) {
+        if ($r[1] > '' && !in_array($r[1], $relationsArr)) {
+            $relationsArr[] = $r[1];
+        }
+    }
+
+    foreach ($definitions as $d) {
+        if ($d[0] > '' && in_array($d[0], $relationsArr)) {
+            $nodes[] = array(
+                'name' => $d[0],
+                'definition' => $d[1]
+            );
+        }
+    }
+    foreach ($nodes as $k => $node) {
+        foreach ($relations as $r) {
+            if ($node['name'] == $r[0] || $node['name'] == $r[1]) {
+                $nodes[$k]['group'] = array_search($r[2], $groups);
             }
         }
+
     }
 
     return $nodes;
@@ -93,18 +111,17 @@ function getLinks($data, $nodes)
 
     foreach ($data as $k => $d) {
         $link = array();
-        for ($i = 0; $i < count($nodes); $i ++) {
-            if ($nodes[$i]['name'] == $d[1]) {
+        foreach ($nodes as $i => $node) {
+            if($node['name'] == 'DA') {
+                echo $d[0] . ' / ' . $d[1] . '<br />';
+            }
+            if ($node['name'] == $d[1]) {
                 $link['target'] = $i;
             }
-            if ($nodes[$i]['name'] == $d[0]) {
+            if ($node['name'] == $d[0]) {
                 $link['source'] = $i;
             }
         }
-        /*if(!isset($link['source']) || !isset($link['target'])) {
-            var_dump($d);
-            echo '<br/>';
-        }*/
         if (count($link) == 2) {
             $links[] = $link;
         }
