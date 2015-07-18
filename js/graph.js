@@ -6,8 +6,6 @@
         height: 600
     };
 
-    var graphData = [];
-
     function defaults(obj) {
         Array.prototype.slice.call(arguments, 1).forEach(function (source) {
             if (source) {
@@ -21,19 +19,11 @@
 
     /*** Graph functions ***/
 
-    function Graph(options) {
+    function Graph() {
+    }
+
+    Graph.prototype.draw = function(options) {
         this.options = defaults(options, defaultOptions);
-
-        //console.log(this.options.data);
-
-        return this.draw();
-    }
-
-    Graph.prototype.test = function() {
-        console.log(this.options.data);
-    }
-
-    Graph.prototype.draw = function() {
         var self = this;
         var options = self.options;
         var graph = options.data
@@ -48,7 +38,7 @@
         var svg = d3.select(options.element).append('svg')
             .attr('width', options.width)
             .attr('height', options.height);
-console.log(graph.links);
+
         force
             .nodes(graph.nodes)
             .links(graph.links)
@@ -60,7 +50,6 @@ console.log(graph.links);
             .append("line")
             .attr("class", "link")
             .style("stroke", function (d) {
-                console.log(d);
                 var nodes = graph.nodes;
                 var index = d.source.index;
                 return color(nodes[index].group);

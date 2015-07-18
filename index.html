@@ -7,7 +7,35 @@
     </head>
     <body>
     <div class="container">
-        <div id="filter"></div>
+        <div id="filter">
+            <ul>
+                <li>
+                    <select name="relationships" id="filter_relationships">
+                        <option value="">Relationship</option>
+                        <option value="Location">Location</option>
+                        <option value="Sector">Sector</option>
+                        <option value="Status">Status</option>
+                        <option value="Theme">Theme</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Partner">Partner</option>
+                        <option value="Commerical">Commerical</option>
+                        <option value="Investor">Investor</option>
+                        <option value="Competitor">Competitor</option>
+                        <option value="Parner">Parner</option>
+                    </select>
+                </li>
+                <li>
+                    <select name="definition" id="filter_definition">
+                        <option value="">Definition</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Sector">Sector</option>
+                        <option value="Company">Company</option>
+                        <option value="Relationship">Relationship</option>
+                        <option value="Themes">Themes</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
         <div id="graph"></div>
     </div>
     <script type="text/javascript" src="js/d3.min.js"></script>

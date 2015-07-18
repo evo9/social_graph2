@@ -89,7 +89,7 @@ function getNodes($relations, $definitions, $groups)
         if ($d[0] > '' && in_array($d[0], $relationsArr)) {
             $nodes[] = array(
                 'name' => $d[0],
-                'definition' => $d[1]
+                'def' => $d[1]
             );
         }
     }
@@ -97,6 +97,7 @@ function getNodes($relations, $definitions, $groups)
         foreach ($relations as $r) {
             if ($node['name'] == $r[0] || $node['name'] == $r[1]) {
                 $nodes[$k]['group'] = array_search($r[2], $groups);
+                $nodes[$k]['rel'] = $r[2];
             }
         }
 
@@ -112,9 +113,6 @@ function getLinks($data, $nodes)
     foreach ($data as $k => $d) {
         $link = array();
         foreach ($nodes as $i => $node) {
-            /*if($node['name'] == 'DA') {
-                echo $d[0] . ' / ' . $d[1] . '<br />';
-            }*/
             if ($node['name'] == $d[1]) {
                 $link['target'] = $i;
             }
