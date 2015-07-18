@@ -26,7 +26,7 @@
         this.options = defaults(options, defaultOptions);
         var self = this;
         var options = self.options;
-        var graph = options.data
+        var graph = JSON.parse(JSON.stringify(options.data));
 
         var color = d3.scale.category20();
 
@@ -34,6 +34,8 @@
             .charge(-120)
             .linkDistance(100)
             .size([options.width, options.height]);
+
+        d3.select(options.element + ' > svg').remove();
 
         var svg = d3.select(options.element).append('svg')
             .attr('width', options.width)

@@ -113,6 +113,8 @@ function getLinks($data, $nodes)
     foreach ($data as $k => $d) {
         $link = array();
         foreach ($nodes as $i => $node) {
+            $link['rel'] = $node['rel'];
+            $link['def'] = $node['def'];
             if ($node['name'] == $d[1]) {
                 $link['target'] = $i;
             }
@@ -120,7 +122,7 @@ function getLinks($data, $nodes)
                 $link['source'] = $i;
             }
         }
-        if (count($link) == 2) {
+        if (count($link) == 4) {
             $links[] = $link;
         }
     }
