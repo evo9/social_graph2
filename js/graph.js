@@ -52,7 +52,9 @@
             .style("stroke", function (d) {
                 var nodes = graph.nodes;
                 var index = d.source.index;
-                return color(nodes[index].group);
+                if (nodes[index]) {
+                    return color(nodes[index].group);
+                }
             });
 
         var node = svg.selectAll(".node")
