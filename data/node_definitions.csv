@@ -1,0 +1,204 @@
+Node,Definition
+US,Geography
+Europe,Geography
+Asia,Geography
+Consumer Discretionary (Other),Sector
+Media,Sector
+Automotive,Sector
+Transportation,Sector
+Hotels/Leisure,Sector
+Retail,Sector
+Consumer Staples (Other),Sector
+Food and Beverage,Sector
+Energy,Sector
+Financials,Sector
+Banking and Financials,Sector
+Insurance,Sector
+Healthcare,Sector
+Industrials,Sector
+Materials,Sector
+Technology (Other),Sector
+Hardware,Sector
+Software,Sector
+Internet Svcs,Sector
+Telecommunications,Sector
+ActIfio,Company
+Adyen,Company
+Aetna,Company
+AIG,Company
+AirBnB,Company
+Akamai,Company
+Alibaba,Company
+Ally,Company
+Amazon,Company
+American Express,Company
+AmerisourceBergen,Company
+Anthem,Company
+AppDynamics,Company
+Apple,Company
+Appnexis,Company
+ATT,Company
+Automattic,Company
+Bank of America,Company
+Beepi,Company
+BeiBei,Company
+Betfair,Company
+Betterment,Company
+Bharti,Company
+BlaBla,Company
+Bloom Energy,Company
+BlueApron,Company
+BMW,Company
+BT,Company
+Cardinal Health,Company
+CBS,Company
+Chase,Company
+China Mobile,Company
+ChinaCom,Company
+ChryslerFiat,Company
+Cisco,Company
+Citibank,Company
+Cloudera,Company
+CloudFlare,Company
+Comcast,Company
+ContextLogic (Wish),Company
+Coupa Software,Company
+Coupang,Company
+Credit Karma,Company
+CVS Health,Company
+Deem,Company
+DeliveryHero,Company
+Dell,Company
+Dianping,Company
+Discover,Company
+Disney,Company
+DJI,Company
+DoctoronDemand,Company
+Docusign,Company
+Domo,Company
+DropBox,Company
+DT,Company
+Dwolla,Company
+Ebay,Company
+EventBrite,Company
+Evernote,Company
+ExpressScripts,Company
+Factual,Company
+Fanatics,Company
+FanDuel,Company
+Farfetch,Company
+FCA,Company
+First Data,Company
+FirstDibs,Company
+FitBit,Company
+FlipKart,Company
+Ford,Company
+FT,Company
+Funding Circle,Company
+Garena Online,Company
+Garmin,Company
+Gasbuddy,Company
+Geico,Company
+Gilt Group,Company
+GM,Company
+Good Technology,Company
+Google,Company
+GoPro,Company
+GrabTaxi,Company
+Groupon,Company
+Hailo,Company
+Hanhua Financial,Company
+HCA,Company
+Home24,Company
+Honda,Company
+Honest Company,Company
+Houzz,Company
+HP,Company
+HSBC,Company
+HTC,Company
+Hyundai,Company
+Infinidot,Company
+InMobi,Company
+Insidesales.com,Company
+Instacart,Company
+Intarcia,Company
+IronSource,Company
+Jasper Technologies,Company
+Jawbone,Company
+JD.com,Company
+Johnson and Johnson,Company
+JustFab,Company
+Kabam,Company
+KDD,Company
+Keybase,Company
+Kia,Company
+Koudai Shopping,Company
+Lamabang,Company
+Lazada Group,Company
+Legendary Entertainment,Company
+Lending Club,Company
+Lenovo,Company
+LG,Company
+Liberty Global,Company
+Liberty Mutual,Company
+Lookout,Company
+LootCrate,Company
+Lufax,Company
+Lyft,Company
+MagicLeap,Company
+MapBox,Company
+MarkLogic,Company
+MasterCard,Company
+McKesson,Company
+Meituan,Company
+Mercedes,Company
+MicroMax,Company
+Microsoft,Company
+Mobileye,Company
+Moderna,Company
+Mogujie,Company
+MongoDB,Company
+MuleSoft,Company
+Munchery,Company
+Navdy,Company
+Netflix,Company
+News Corp,Company
+NextDoor,Company
+Nissan,Company
+Nokia,Company
+NTT,Company
+Nutanix,Company
+Ola Cabs,Company
+OnDeck,Company
+One97 Communications,Company
+Orange,Company
+Oscar Health,Company
+Palantir,Company
+PayPal,Company
+Pinterest,Company
+PluralSight,Company
+Powa,Company
+ProseibenSat,Company
+Prosper,Company
+Proteus Digital Health,Company
+PureStorage,Company
+Qualtrics,Company
+Quikr,Company
+Razer,Company
+Robinhood,Company
+Salesforce.com,Company
+Samsung,Company
+Santander,Company
+Seagate,Company
+Shazam,Company
+Shopify,Company
+Shyp,Company
+SimpliViti,Company
+Slack,Company
+Snapchat,Company
+SnapDeal,Company
+Social Finance,Company
+Competitor,Relationship
+Investor,Relationship
+Commerical,Relationship
+Partner,Relationship
