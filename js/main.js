@@ -38,6 +38,7 @@ $(document).ready(function () {
                     options.data.links = filterRel(relationships, links);
                     options.data.nodes = getNodes(options.data.links, nodes)
                     options.data.links = getLinks(links, options.data.nodes);
+                    console.log(options.data.links);
                 }
                 if (definitions.length > 0) {
                     options.data.nodes = filterDef(definitions, nodes)
@@ -95,7 +96,10 @@ function getLinks(links, nodes) {
                 link['target'] = i;
             }
         }
-        if (link.source && link.target) {
+        /*if (link.source || link.target) {
+            console.log(Object.keys(link));
+        }*/
+        if (Object.keys(link).length == 2) {
             filtered.push(link);
         }
     }
