@@ -31,7 +31,7 @@
         var color = d3.scale.category20();
 
         var force = d3.layout.force()
-            .charge(-120)
+            .charge(-150)
             .linkDistance(100)
             .size([options.width, options.height]);
 
