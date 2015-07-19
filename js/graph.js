@@ -92,22 +92,6 @@
                     return d.y;
                 });
         });
-
-        /*d3.selectAll("circle")
-            .attr("cx", function (d) {
-                return d.x;
-            })
-            .attr("cy", function (d) {
-                return d.y;
-            });
-
-        d3.selectAll("text")
-            .attr("x", function (d) {
-                return d.x;
-            })
-            .attr("y", function (d) {
-                return d.y;
-            });*/
     }
 
     if (typeof define === "function" && define.amd) {
@@ -119,23 +103,3 @@
         window.Graph = window.Graph = Graph;
     }
 })();
-/*
-var Graph = {
-    load:
-    draw: function(element, data, options) {
-        var defaultOptions = {
-            width: 960,
-            height: 600
-        };
-
-        if ('undefined' !== typeof options) {
-            for (var i in options) {
-                if ('undefined' !== typeof options[i]) {
-                    defaultOptions[i] = options[i];
-                }
-            }
-        }
-
-
-    }
-};*/
