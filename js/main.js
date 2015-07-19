@@ -86,6 +86,10 @@ function filterDef(def, nodes, links) {
                     items.push(nodes[links[j].target].name);
                     filtered.push(nodes[links[j].target]);
                 }
+                if (links[j].target == filtered[i].index && !inArray(nodes[links[j].source].name, items)) {
+                    items.push(nodes[links[j].source].name);
+                    filtered.push(nodes[links[j].source]);
+                }
             }
         }
     }
@@ -105,9 +109,6 @@ function getLinks(links, nodes) {
                 link['target'] = i;
             }
         }
-        /*if (link.source || link.target) {
-            console.log(Object.keys(link));
-        }*/
         if (Object.keys(link).length == 2) {
             filtered.push(link);
         }
