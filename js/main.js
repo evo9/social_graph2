@@ -82,11 +82,11 @@ function filterDef(def, nodes, links) {
                 filtered.push(nodes[i]);
             }
             for (var j = 0; j < links.length; j ++) {
-                if (links[j].source == filtered[i].index && !inArray(nodes[links[j].target].name, items)) {
+                if (links[j].source == nodes[i].index && !inArray(nodes[links[j].target].name, items)) {
                     items.push(nodes[links[j].target].name);
                     filtered.push(nodes[links[j].target]);
                 }
-                if (links[j].target == filtered[i].index && !inArray(nodes[links[j].source].name, items)) {
+                if (links[j].target == nodes[i].index && !inArray(nodes[links[j].source].name, items)) {
                     items.push(nodes[links[j].source].name);
                     filtered.push(nodes[links[j].source]);
                 }
