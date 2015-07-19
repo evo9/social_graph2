@@ -33,28 +33,25 @@ $(document).ready(function () {
 
                 var nodes = JSON.parse(JSON.stringify(data.nodes));
                 var links = JSON.parse(JSON.stringify(data.links));
-                //options.data.nodes = [];
-                //options.data.links = [];
-                var filtered = {};
 
-                if (relationships.length > 0 && definitions.length > 0) {
-                    for (var i = 0; i < nodes.length; i ++) {
-                        if (inArray(nodes[i].rel, relationships) || inArray(nodes[i].rel, definitions)) {
-                            options.data.nodes.push(nodes[i]);
-                        }
-                    }
-                }
-                else if (relationships.length > 0 && definitions.length == 0) {
+                if (relationships.length) {
                     options.data.links = filterRel(relationships, links);
                     options.data.nodes = getNodes(options.data.links, nodes)
-                    options.data.links = getLinks(options.data.links, options.data.nodes);
+                    options.data.links = getLinks(links, options.data.nodes);
                 }
-                else if (relationships.length == 0 && definitions.length > 0) {
-                    for (var i = 0; i < nodes.length; i ++) {
-                        if (inArray(nodes[i].rel, definitions)) {
-                            options.data.nodes.push(nodes[i]);
-                        }
-                    }
+                if (definitions.length > 0) {
+                    options.data.nodes = filterDef(definitions, nodes)
+                    options.data.links = getLinks(links, options.data.nodes);
+                }
+                if (relationships.length > 0 && definitions.length > 0) {
+                    options.data.links = filterRel(relationships, links);
+                    options.data.nodes = getNodes(options.data.links, nodes)
+                    options.data.nodes = filterDef(definitions, options.data.nodes)
+                    options.data.links = getLinks(links, options.data.nodes);
+                }
+                if (relationships.length == 0 && definitions.length == 0) {
+                    options.data.nodes = nodes;
+                    options.data.links = links;
                 }
 
                 graph.draw(options);
@@ -62,6 +59,29 @@ $(document).ready(function () {
         }
     });
 });
+
+function filterRel(rel, links) {
+    var filtered = [];
+    for (var i = 0; i < links.length; i ++) {
+        if (inArray(links[i].rel, rel)) {
+            filtered.push(links[i]);
+        }
+    }
+
+    return filtered;
+}
+
+function filterDef(def, nodes) {
+    var filtered = [];
+
+    for (var i = 0; i < nodes.length; i ++) {
+        if (inArray(nodes[i].def, def)) {
+            filtered.push(nodes[i]);
+        }
+    }
+
+    return filtered;
+}
 
 function getLinks(links, nodes) {
     var filtered = [];
@@ -75,23 +95,8 @@ function getLinks(links, nodes) {
                 link['target'] = i;
             }
         }
-        filtered.push(link);
-    }
-
-    return filtered;
-}
-
-function filterRel(rel, links) {
-    var filtered = [];
-    for (var i = 0; i < links.length; i ++) {
-        if (inArray(links[i].rel, rel)) {
-            /*if (!inArray(nodes[links[i].source].name, nodes)) {
-                nodes.push(nodes[links[i].source]);
-            }
-            if (!inArray(nodes[links[i].target])) {
-                nodes.push(nodes[links[i].target]);
-            }*/
-            filtered.push(links[i]);
+        if (link.source && link.target) {
+            filtered.push(link);
         }
     }
 

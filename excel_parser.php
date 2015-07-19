@@ -97,7 +97,6 @@ function getNodes($relations, $definitions, $groups)
         foreach ($relations as $r) {
             if ($node['name'] == $r[0] || $node['name'] == $r[1]) {
                 $nodes[$k]['group'] = array_search($r[2], $groups);
-                $nodes[$k]['rel'] = $r[2];
                 $nodes[$k]['index'] = $k;
             }
         }
