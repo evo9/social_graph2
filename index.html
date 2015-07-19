@@ -8,33 +8,73 @@
     <body>
     <div class="container">
         <div id="filter">
-            <ul>
+            <p>Relationships</p>
+            <ul class="relationships">
                 <li>
-                    <select name="relationships" id="filter_relationships">
-                        <option value="">Relationship</option>
-                        <option value="Location">Location</option>
-                        <option value="Sector">Sector</option>
-                        <option value="Status">Status</option>
-                        <option value="Theme">Theme</option>
-                        <option value="Commercial">Commercial</option>
-                        <option value="Partner">Partner</option>
-                        <option value="Commerical">Commerical</option>
-                        <option value="Investor">Investor</option>
-                        <option value="Competitor">Competitor</option>
-                        <option value="Parner">Parner</option>
-                    </select>
+                    <label for="relationship_location">Location</label>
+                    <input type="checkbox" value="Location" id="relationship_location"/>
                 </li>
                 <li>
-                    <select name="definition" id="filter_definition">
-                        <option value="">Definition</option>
-                        <option value="Geography">Geography</option>
-                        <option value="Sector">Sector</option>
-                        <option value="Company">Company</option>
-                        <option value="Relationship">Relationship</option>
-                        <option value="Themes">Themes</option>
-                    </select>
+                    <label for="relationship_sector">Sector</label>
+                    <input type="checkbox" value="Sector" id="relationship_sector"/>
+                </li>
+                <li>
+                    <label for="relationship_status">Status</label>
+                    <input type="checkbox" value="Status" id="relationship_status"/>
+                </li>
+                <li>
+                    <label for="relationship_theme">Theme</label>
+                    <input type="checkbox" value="Theme" id="relationship_theme"/>
+                </li>
+                <li>
+                    <label for="relationship_commercial">Commercial</label>
+                    <input type="checkbox" value="Commercial" id="relationship_commercial"/>
+                </li>
+                <li>
+                    <label for="relationship_partner">Partner</label>
+                    <input type="checkbox" value="Parther" id="relationship_partner"/>
+                </li>
+                <li>
+                    <label for="relationship_commerical">Commerical</label>
+                    <input type="checkbox" value="Commerical" id="relationship_commerical"/></li>
+                <li>
+                    <label for="relationship_investor">Investor</label>
+                    <input type="checkbox" value="Investor" id="relationship_investor"/>
+                </li>
+                <li>
+                    <label for="relationship_competitor">Competitor</label>
+                    <input type="checkbox" value="Competitor" id="relationship_competitor"/>
+                </li>
+                <li>
+                    <label for="relationship_parner">Parner</label>
+                    <input type="checkbox" value="Parner" id="relationship_parner"/>
                 </li>
             </ul>
+            <div class="clear"></div>
+            <p>Definitions</p>
+            <ul class="definitions">
+                <li>
+                    <label for="definition_geography">Geography</label>
+                    <input type="checkbox" value="Geography" id="definition_geography"/>
+                </li>
+                <li>
+                    <label for="definition_sector">Sector</label>
+                    <input type="checkbox" value="Sector" id="definition_sector"/>
+                </li>
+                <li>
+                    <label for="definition_company">Company</label>
+                    <input type="checkbox" value="Company" id="definition_company"/>
+                </li>
+                <li>
+                    <label for="definition_relationship">Relationship</label>
+                    <input type="checkbox" value="Relationship" id="definition_relationship"/>
+                </li>
+                <li>
+                    <label for="definition_themes">Themes</label>
+                    <input type="checkbox" value="Themes" id="definition_themes"/>
+                </li>
+            </ul>
+            <div class="clear"></div>
         </div>
         <div id="graph"></div>
     </div>

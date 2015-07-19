@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    $('#filter input[type="checkbox"]').each(function() {
+        if ($(this).is(':checked')) {
+            $(this).attr('checked', false);
+        }
+    });
     d3.json('excel_parser.php', function (error, data) {
         if (data) {
             var graph = new Graph();
@@ -12,48 +17,45 @@ $(document).ready(function () {
             };
             graph.draw(options);
 
-            $('#filter_relationships, #filter_definition').change(function () {
-                var def = $('#filter_definition').val(),
-                    rel = $('#filter_relationships').val();
-
-                var filtered = {}
-                filtered['nodes'] = [];
-                filtered['links'] = data.links;
-
-                var nodes = data.nodes;
-                var links = data.links;
-
-                for (var i = 0; i < nodes.length; i++) {
-                    if (def.length > 0 && rel.length > 0 && (def == nodes[i]['def'] || rel == nodes[i]['rel'])) {
-                        filtered['nodes'].push(nodes[i]);
+            $('#filter input[type="checkbox"]').click(function() {
+                var definitions = [];
+                var relationships = [];
+                $('#filter ul.relationships input[type="checkbox"]').each(function() {
+                    if ($(this).is(':checked')) {
+                        relationships.push($(this).val());
                     }
-                    if (def.length > 0 && rel.length == 0 && def == nodes[i]['def']) {
-                        filtered['nodes'].push(nodes[i]);
+                });
+                $('#filter ul.definitions input[type="checkbox"]').each(function() {
+                    if ($(this).is(':checked')) {
+                        definitions.push($(this).val());
                     }
-                    if (def.length == 0 && rel.length > 0 && rel == nodes[i]['rel']) {
-                        filtered['nodes'].push(nodes[i]);
-                    }
-                    if (def.length == 0 && rel.length == 0) {
-                        filtered['nodes'].push(nodes[i]);
+                });
+
+                var nodes = JSON.parse(JSON.stringify(data.nodes));
+                var links = JSON.parse(JSON.stringify(data.links));
+                //options.data.nodes = [];
+                //options.data.links = [];
+                var filtered = {};
+
+                if (relationships.length > 0 && definitions.length > 0) {
+                    for (var i = 0; i < nodes.length; i ++) {
+                        if (inArray(nodes[i].rel, relationships) || inArray(nodes[i].rel, definitions)) {
+                            options.data.nodes.push(nodes[i]);
+                        }
                     }
                 }
-
-                /*for (var i = 0; i < links.length; i++) {
-                    if (def.length > 0 && rel.length > 0 && (def == links[i]['def'] || rel == links[i]['rel'])) {
-                        filtered['links'].push(links[i]);
+                else if (relationships.length > 0 && definitions.length == 0) {
+                    options.data.links = filterRel(relationships, links);
+                    options.data.nodes = getNodes(options.data.links, nodes)
+                    options.data.links = getLinks(options.data.links, options.data.nodes);
+                }
+                else if (relationships.length == 0 && definitions.length > 0) {
+                    for (var i = 0; i < nodes.length; i ++) {
+                        if (inArray(nodes[i].rel, definitions)) {
+                            options.data.nodes.push(nodes[i]);
+                        }
                     }
-                    if (def.length > 0 && rel.length == 0 && def == links[i]['def']) {
-                        filtered['links'].push(links[i]);
-                    }
-                    if (def.length == 0 && rel.length > 0 && rel == links[i]['rel']) {
-                        filtered['links'].push(links[i]);
-                    }
-                    if (def.length == 0 && rel.length == 0) {
-                        filtered['links'].push(links[i]);
-                    }
-                }*/
-                //console.log(filtered['links']);
-                options['data'] = filtered;
+                }
 
                 graph.draw(options);
             });
@@ -61,20 +63,57 @@ $(document).ready(function () {
     });
 });
 
-function filterLinks(links, nodes) {
+function getLinks(links, nodes) {
     var filtered = [];
-    var nodesIndexes = [];
-    for (var i = 0; i < nodes.length; i++) {
-        nodesIndexes.push(i);
+    for (var j = 0; j < links.length; j ++) {
+        var link = {};
+        for (var i = 0; i < nodes.length; i ++) {
+            if (links[j].source == nodes[i].index) {
+                link['source'] = i;
+            }
+            if (links[j].target == nodes[i].index) {
+                link['target'] = i;
+            }
+        }
+        filtered.push(link);
     }
 
-    for (var i = 0; i < links.length; i++) {
-        if (inArray(links[i].target, nodesIndexes) || inArray(links[i].source, nodesIndexes)) {
-            console.log(links[i]);
+    return filtered;
+}
+
+function filterRel(rel, links) {
+    var filtered = [];
+    for (var i = 0; i < links.length; i ++) {
+        if (inArray(links[i].rel, rel)) {
+            /*if (!inArray(nodes[links[i].source].name, nodes)) {
+                nodes.push(nodes[links[i].source]);
+            }
+            if (!inArray(nodes[links[i].target])) {
+                nodes.push(nodes[links[i].target]);
+            }*/
             filtered.push(links[i]);
         }
     }
+
     return filtered;
+}
+
+function getNodes(links, nodes) {
+    var items = [],
+        returns = []
+
+    for (var i = 0; i < links.length; i ++) {
+        if (!inArray(nodes[links[i].source].name, items)) {
+            items.push(nodes[links[i].source].name);
+            returns.push(nodes[links[i].source]);
+        }
+        if (!inArray(nodes[links[i].target].name, items)) {
+            items.push(nodes[links[i].target].name);
+            returns.push(nodes[links[i].target]);
+        }
+    }
+
+    return returns;
 }
 
 function inArray(item, arr) {

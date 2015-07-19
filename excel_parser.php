@@ -85,7 +85,7 @@ function getNodes($relations, $definitions, $groups)
         }
     }
 
-    foreach ($definitions as $d) {
+    foreach ($definitions as $key => $d) {
         if ($d[0] > '' && in_array($d[0], $relationsArr)) {
             $nodes[] = array(
                 'name' => $d[0],
@@ -98,6 +98,7 @@ function getNodes($relations, $definitions, $groups)
             if ($node['name'] == $r[0] || $node['name'] == $r[1]) {
                 $nodes[$k]['group'] = array_search($r[2], $groups);
                 $nodes[$k]['rel'] = $r[2];
+                $nodes[$k]['index'] = $k;
             }
         }
 
@@ -111,18 +112,16 @@ function getLinks($data, $nodes)
     $links = array();
 
     foreach ($data as $k => $d) {
-        $link = array();
+        $link = array('rel' => $d[2]);
         foreach ($nodes as $i => $node) {
-            $link['rel'] = $node['rel'];
-            $link['def'] = $node['def'];
-            if ($node['name'] == $d[1]) {
-                $link['target'] = $i;
-            }
             if ($node['name'] == $d[0]) {
                 $link['source'] = $i;
             }
+            if ($node['name'] == $d[1]) {
+                $link['target'] = $i;
+            }
         }
-        if (count($link) == 4) {
+        if (count($link) == 3) {
             $links[] = $link;
         }
     }
@@ -134,9 +133,9 @@ function getAdditionalNodesData($data, $nodes)
 {
     $result = array();
 
-    for ($i = 0; $i < count($nodes); $i ++) {
+    foreach ($nodes as $i => $node) {
         foreach ($data as $d) {
-            if ($d[0] == $nodes[$i]['name']) {
+            if ($d[0] == $node['name']) {
                 $result[$i] = array(
                     'Market Cap' => $d[1],
                     'Total Funding' => $d[2],
